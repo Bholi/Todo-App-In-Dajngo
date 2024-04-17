@@ -32,6 +32,15 @@ def delete(request,pk):
     delete_todo = Todo.objects.get(id = pk)
     delete_todo.delete()
     return redirect('home')
+
+def deleteall(request):
+    delete_all = Todo.objects.all()
+    delete_all.delete()
+    return redirect('home')
+
+def confirm(request,pk):
+    confirm_delete = Todo.objects.get(id = pk)
+    return render(request, 'confirm.html',{'todo':confirm_delete})
     
 
 

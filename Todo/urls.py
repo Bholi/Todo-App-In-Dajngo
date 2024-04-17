@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from base.views import home, create, edit, delete
+from base.views import home, create, edit, delete, deleteall, confirm
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,4 +24,6 @@ urlpatterns = [
     path('create/',create, name='create'),
     path('edit/<int:pk>/', edit, name='edit'),
     path('delete/<int:pk>/',delete, name='delete'),
+    path('deleteall/',deleteall, name='deleteall' ),
+    path('confirm/<int:pk>/',confirm, name='confirm'),
 ]

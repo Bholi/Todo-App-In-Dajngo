@@ -15,36 +15,79 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+    <style>
+      .btns{
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+      }
+      .add{
+       margin-right: 20px;
+      }
+    </style>
   </head>
   <body>
-    <h1>This is homepage</h1>
+    {% include 'nav.html' %}
     <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Name</th>
-      <th scope="col">Description</th>
-      <th scope="col">Status</th>
-      <th scope="col">Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    {% for t in todo %}
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Description</th>
+          <th scope="col">Status</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for t in todo %}
 
-    <tr>
-      <th scope="row">{{t.id}}</th>
-      <td>{{t.name}}</td>
-      <td>{{t.description}}</td>
-      <td>{{t.status}}</td>
-      <td><a href="{% url 'edit' pk=t.id %}"><button type="button" class="btn btn-success">Edit</button></a></td>
-      <td><a href="{% url 'delete' pk=t.id %}"><button type="button" class="btn btn-danger">Delete</button></a></td>
-    </tr>
-    {% endfor %}
-  
-  </tbody>
-</table>
-<a href="{% url 'create' %}"><button type="button" class="btn btn-info">Add Todo</button></a>
-  </body> 
+        <tr>
+          <th scope="row">{{t.id}}</th>
+          <td>{{t.name}}</td>
+          <td>{{t.description}}</td>
+          <td>{{t.status}}</td>
+          <td>
+            <a href="{% url 'edit' pk=t.id %}"
+              ><button type="button" class="btn btn-success">Edit</button></a
+            >
+            <a href="{% url 'confirm' pk=t.id %}"
+              ><button type="button" class="btn btn-danger">Delete</button></a
+            >
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <div class="btns">
+    <a href="{% url 'create' %}"
+      ><button type="button" class="btn btn-info add">Add Todo</button></a
+    >
+    <!-- <a href="{% url 'deleteall' %}"><button type="button" class="btn btn-danger">Delete All</button></a> -->
+  <!-- Button trigger modal -->
+<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  Delete All
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure want to delete ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      <a href="{% url 'deleteall' %}"> <button type="button" class="btn btn-primary">Yes</button> </a> 
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+  </body>
   <script
     src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
     integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
